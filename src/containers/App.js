@@ -15,15 +15,17 @@ class App extends Component {
   }
 
   handleChange(value) {
+    const {dispatch} = this.props
+    dispatch(fetchRedditData(value))
   }
 
   render() {
     let {items} = this.props
     return (
       <div>
-        <select onChange={e => this.handleChange(e.target.value)}>
-          <option defaultValue='React'>React</option>
-          <option value='Frontend'>Frontend</option>
+        <select defaultValue='reactjs' onChange={e => this.handleChange(e.target.value)}>
+          <option value='reactjs'>React</option>
+          <option value='frontend'>Frontend</option>
         </select>
         {_.isEmpty(items) ? (<div><h2>Loading...</h2></div>) : (<Record records={items.data.children} />)}
       </div>

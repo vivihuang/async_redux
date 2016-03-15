@@ -11,18 +11,30 @@ class App extends Component {
 
   componentWillMount() {
    const {dispatch} = this.props
-   dispatch(fetchRedditData())
+   dispatch(fetchRedditData(this.props.selectedReddit))
+  }
+
+  handleChange(value) {
   }
 
   render() {
     let {items} = this.props
-    return _.isEmpty(items)
-      ? (<div><h2>Loading...</h2></div>)
-      : (<div><Record records={items.data.children} /></div>)
+    return (
+      <div>
+        <select onChange={e => this.handleChange(e.target.value)}>
+          <option defaultValue='React'>React</option>
+          <option value='Frontend'>Frontend</option>
+        </select>
+        {_.isEmpty(items) ? (<div><h2>Loading...</h2></div>) : (<Record records={items.data.children} />)}
+      </div>
+    )
   }
 }
 
-let mapStateToProps = (state) => { return {items: state} }
+let mapStateToProps = (state) => { return {
+  items: state.fetchData,
+  selectedReddit: state.selectedReddit
+} }
 
 let mapDispatchToProps = (dispatch) => { return {dispatch} }
 

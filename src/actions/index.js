@@ -3,7 +3,8 @@ import fetch from 'isomorphic-fetch'
 let receiveRedditData = (jsonData) => {
   return {
     type: 'fetch',
-    data: jsonData
+    data: jsonData,
+    time: Date.now()
   }
 }
 

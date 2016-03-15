@@ -12,9 +12,15 @@ let selectedReddit = (state = 'reactjs', action) => {
 let fetchData = (state = [], action) => {
   switch (action.type) {
     case 'fetch':
-      return action.data
+      return {
+        data: action.data,
+        time: action.time
+      }
     default:
-      return state
+      return {
+        data: state,
+        time: Date.now()
+      }
   }
 }
 

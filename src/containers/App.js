@@ -13,7 +13,8 @@ class App extends Component {
   }
 
   componentWillMount () {
-    this.handleRefresh()
+    const {dispatch} = this.props
+    dispatch(fetchRedditData(this.props.selectedReddit))
   }
 
   handleChange (value) {
@@ -21,17 +22,24 @@ class App extends Component {
     dispatch(fetchRedditData(value))
   }
 
-  handleRefresh () {
+  handleRefresh (event) {
+    event.preventDefault()
     const {dispatch} = this.props
     dispatch(fetchRedditData(this.props.selectedReddit))
   }
 
   render () {
-    let {items, selectedReddit} = this.props
+    let {items, refreshTime, selectedReddit} = this.props
     return (
       <div>
+        <h2>{selectedReddit}</h2>
         <SelectBox onChange={this.handleChange} options={['reactjs', 'frontend']} value={selectedReddit} />
-        <button onClick={this.handleRefresh}>Refresh</button>
+        <div>
+          <p>Last updated at {new Date(refreshTime).toLocaleTimeString()}
+            {'  '}
+            <button onClick={this.handleRefresh}>Refresh</button>
+          </p>
+        </div>
         {_.isEmpty(items) ? (<div><h2>Loading...</h2></div>) : (<Record records={items.data.children} />)}
       </div>
     )
@@ -40,7 +48,8 @@ class App extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    items: state.fetchData,
+    items: state.fetchData.data,
+    refreshTime: state.fetchData.time,
     selectedReddit: state.selectedReddit
   }
 }

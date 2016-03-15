@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import { fetchRedditData } from '../actions'
 import Record from '../components/Record'
+import SelectBox from '../components/SelectBox'
 
 class App extends Component {
   constructor(props) {
     super(props)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentWillMount() {
@@ -20,13 +22,10 @@ class App extends Component {
   }
 
   render() {
-    let {items} = this.props
+    let {items, selectedReddit} = this.props
     return (
       <div>
-        <select defaultValue='reactjs' onChange={e => this.handleChange(e.target.value)}>
-          <option value='reactjs'>React</option>
-          <option value='frontend'>Frontend</option>
-        </select>
+        <SelectBox onChange={this.handleChange} options={['reactjs', 'frontend']} value={selectedReddit} />
         {_.isEmpty(items) ? (<div><h2>Loading...</h2></div>) : (<Record records={items.data.children} />)}
       </div>
     )

@@ -15,7 +15,7 @@ import runSequence from 'run-sequence'
 var paths = {
   scripts: ['src/**/*.js','src/**/*.jsx'],
 	test: ['src/test/**/*.js', 'src/test/**/*.jsx'],
-	publicFiles: ['public/*.js']
+	publicFiles: ['public/**/*']
   //images: 'client/img/**/*'
 } 
 

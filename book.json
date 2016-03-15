@@ -1,0 +1,18 @@
+{
+  "kind": "book",
+  "data": {
+    "id": 0,
+    "children": [
+      {
+        "id": 0,
+        "title": "Little Prince",
+        "rating": 5
+      },
+      {
+        "id": 1,
+        "title": "Blossom",
+        "rating": 4
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "kind": "film",
+  "data": {
+    "id": 0,
+    "children": [
+      {
+        "id": 0,
+        "title": "Pie",
+        "rating": 4
+      },
+      {
+        "id": 1,
+        "title": "Zoo",
+        "rating": 5
+      }
+    ]
+  }
+}

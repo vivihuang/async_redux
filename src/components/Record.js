@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
 
 class Record extends Component {
-  render() {
+  render () {
     return (
       <div>
         <ul>

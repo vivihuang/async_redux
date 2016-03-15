@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
 
 class SelectBox extends Component {
-  render() {
+  render () {
     return (
-      <select defaultValue={this.props.value} onChange={e => this.props.onChange(e.target.value)}>
+      <select defaultValue={this.props.value} onChange={(e) => this.props.onChange(e.target.value)}>
         {_.map(this.props.options, (item, index) => { return (<option key={index} value={item}>{item}</option>) })}
       </select>
     )

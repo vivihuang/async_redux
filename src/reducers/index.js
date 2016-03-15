@@ -9,7 +9,7 @@ let selectedReddit = (state = 'reactjs', action) => {
   }
 }
 
-let fetchData = (state=[], action) => {
+let fetchData = (state = [], action) => {
   switch (action.type) {
     case 'fetch':
       return action.data

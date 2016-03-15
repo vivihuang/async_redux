@@ -6,27 +6,27 @@ import Record from '../components/Record'
 import SelectBox from '../components/SelectBox'
 
 class App extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleRefresh = this.handleRefresh.bind(this)
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this.handleRefresh()
   }
 
-  handleChange(value) {
+  handleChange (value) {
     const {dispatch} = this.props
     dispatch(fetchRedditData(value))
   }
 
-  handleRefresh() {
+  handleRefresh () {
     const {dispatch} = this.props
     dispatch(fetchRedditData(this.props.selectedReddit))
   }
 
-  render() {
+  render () {
     let {items, selectedReddit} = this.props
     return (
       <div>
@@ -38,12 +38,13 @@ class App extends Component {
   }
 }
 
-let mapStateToProps = (state) => { return {
-  items: state.fetchData,
-  selectedReddit: state.selectedReddit
-} }
+let mapStateToProps = (state) => {
+  return {
+    items: state.fetchData,
+    selectedReddit: state.selectedReddit
+  }
+}
 
 let mapDispatchToProps = (dispatch) => { return {dispatch} }
 
-App = connect(mapStateToProps, mapDispatchToProps)(App)
-export default App
+export default connect(mapStateToProps, mapDispatchToProps)(App)

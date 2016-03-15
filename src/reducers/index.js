@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-let selectedReddit = (state = 'reactjs', action) => {
+let selectedReddit = (state = 'book', action) => {
   switch (action.type) {
     case 'selectReddit':
       return action.data

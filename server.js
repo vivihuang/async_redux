@@ -28,7 +28,7 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html')
 })
 
-app.get('/api/book', function(res) {
+app.get('/api/book', function(req, res) {
   fs.readFile(BOOK_FILE, function(err, data) {
     if (err) {
       console.error(err)
@@ -61,7 +61,7 @@ app.post('/api/book', function(req, res) {
   });
 });
 
-app.get('/api/film', function(res) {
+app.get('/api/film', function(req, res) {
   fs.readFile(FILM_FILE, function(err, data) {
     if (err) {
       console.error(err)

@@ -33,7 +33,7 @@ class App extends Component {
     return (
       <div>
         <h2>{selectedReddit}</h2>
-        <SelectBox onChange={this.handleChange} options={['reactjs', 'frontend']} value={selectedReddit} />
+        <SelectBox onChange={this.handleChange} options={['book', 'film']} value={selectedReddit} />
         <div>
           <p>Last updated at {new Date(refreshTime).toLocaleTimeString()}
             {'  '}

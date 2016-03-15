@@ -7,7 +7,7 @@ class Record extends Component {
       <div>
         <ul>
           {_.map(this.props.records, (item, index) => {
-            return (<li key={index}>{item.data.title}</li>)
+            return (<li key={index}>{item.title}</li>)
           })}
         </ul>
       </div>

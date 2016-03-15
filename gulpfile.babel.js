@@ -15,11 +15,11 @@ import runSequence from 'run-sequence'
 var paths = {
   scripts: ['src/**/*.js','src/**/*.jsx'],
 	test: ['src/test/**/*.js', 'src/test/**/*.jsx'],
-	publicFiles: ['src/dist/*.js']
+	publicFiles: ['public/*.js']
   //images: 'client/img/**/*'
 } 
 
-gulp.task('clean', function() { return del(['src/dist']) })
+gulp.task('clean', function() { return del(paths.publicFiles) })
 
 gulp.task('watch', function() {
 	gulp.watch(paths.scripts, () => { runSequence('webpack:build-dev', 'standard') })
@@ -75,7 +75,7 @@ gulp.task("webpack:build-dev", function(callback) {
 }) 
 
 gulp.task('standard', function () {
-  return gulp.src([myDevConfig.entry.app])
+  return gulp.src(paths.scripts)
     .pipe(standard())
     .pipe(standard.reporter('default', {
       breakOnError: false
@@ -85,7 +85,7 @@ gulp.task('standard', function () {
 gulp.task('uglify', function() {
   return gulp.src(paths.publicFiles)
     .pipe(uglify())
-    .pipe(gulp.dest('src/dist'))
+    .pipe(gulp.dest(paths.publicFiles))
 })
 
 gulp.task("webpack-dev-server", function() {

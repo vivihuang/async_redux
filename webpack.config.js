@@ -9,7 +9,7 @@ module.exports = {
 		app: "./src/index.js"
 	},
 	output: {
-		path: path.join(__dirname, 'src', "dist"),
+		path: path.join(__dirname, "public"),
 		publicPath: "/public/",
 		filename: "bundle.js"
     // chunkFilename: "bundle-[hash].js"

@@ -9,6 +9,13 @@ let receiveRedditData = (data) => {
   }
 }
 
+export const selectType = (data) => {
+  return {
+    type: 'selectReddit',
+    data
+  }
+}
+
 export const fetchRedditData = (value) => {
   return (dispatch) => {
     return request.get('/api/' + value)

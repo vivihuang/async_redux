@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { fetchRedditData } from '../actions'
+import { fetchRedditData, selectType } from '../actions'
 import Record from '../components/Record'
 import SelectBox from '../components/SelectBox'
 
@@ -17,9 +17,16 @@ class App extends Component {
     dispatch(fetchRedditData(this.props.selectedReddit))
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.selectedReddit !== this.props.selectedReddit) {
+      const { dispatch } = this.props
+      dispatch(fetchRedditData(nextProps.selectedReddit))
+    }
+  }
+
   handleChange (value) {
     const {dispatch} = this.props
-    dispatch(fetchRedditData(value))
+    dispatch(selectType(value))
   }
 
   handleRefresh (event) {

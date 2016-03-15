@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import _ from 'lodash'
 
 let selectedReddit = (state = 'book', action) => {
   switch (action.type) {
@@ -18,7 +19,7 @@ let fetchData = (state = [], action) => {
       }
     default:
       return {
-        data: state,
+        data: _.isEmpty(state) ? state : state.data,
         time: Date.now()
       }
   }

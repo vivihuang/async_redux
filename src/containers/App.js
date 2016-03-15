@@ -9,11 +9,11 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
+    this.handleRefresh = this.handleRefresh.bind(this)
   }
 
   componentWillMount() {
-   const {dispatch} = this.props
-   dispatch(fetchRedditData(this.props.selectedReddit))
+    this.handleRefresh()
   }
 
   handleChange(value) {
@@ -21,11 +21,17 @@ class App extends Component {
     dispatch(fetchRedditData(value))
   }
 
+  handleRefresh() {
+    const {dispatch} = this.props
+    dispatch(fetchRedditData(this.props.selectedReddit))
+  }
+
   render() {
     let {items, selectedReddit} = this.props
     return (
       <div>
         <SelectBox onChange={this.handleChange} options={['reactjs', 'frontend']} value={selectedReddit} />
+        <button onClick={this.handleRefresh}>Refresh</button>
         {_.isEmpty(items) ? (<div><h2>Loading...</h2></div>) : (<Record records={items.data.children} />)}
       </div>
     )

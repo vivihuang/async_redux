@@ -55,3 +55,16 @@ export const deleteData = (selectedType, id) => {
       })
   }
 }
+
+export const modifyData = (selectedType, id, text) => {
+  return (dispatch) => {
+    return request.put('/api/list?type=' + selectedType)
+      .send({id, title: text})
+      .end((err, res) => {
+        if (err) {
+          console.error(err)
+        }
+        dispatch(fetchRedditData(selectedType))
+      })
+  }
+}

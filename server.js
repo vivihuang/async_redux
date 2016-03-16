@@ -84,6 +84,30 @@ app.delete('/api/list', function(req, res) {
   })
 })
 
+app.put('/api/list', function(req, res) {
+  var file_name = path.join(__dirname, req.query.type + '.json')
+  fs.readFile(file_name, function(err, data) {
+    if (err) {
+      console.error(err)
+      process.exit(1)
+    }
+    var dataList = JSON.parse(data)
+    _.map(dataList.data.children, function(item) {
+      if (item.id == req.body.id) {
+        item.title = req.body.title
+      }
+      return item
+    })
+    fs.writeFile(file_name, JSON.stringify(dataList, null, 4), function(err) {
+      if (err) {
+        console.error(err)
+        process.exit(1)
+      }
+      res.json(dataList)
+    })
+  })
+})
+
 app.listen(port, function(error) {
   if (error) {
     console.error(error)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import { fetchRedditData, selectType } from '../actions'
-import Record from '../components/Record'
+import Record from './Record'
 import SelectBox from '../components/SelectBox'
 import InputBox from './InputBox'
 
@@ -48,7 +48,7 @@ class App extends Component {
             <button onClick={this.handleRefresh}>Refresh</button>
           </p>
         </div>
-        {_.isEmpty(items) ? (<div><h2>Loading...</h2></div>) : (<Record records={items.data.children} />)}
+        {_.isEmpty(items) ? (<div><h2>Loading...</h2></div>) : (<Record records={items.data.children} selectedType={selectedReddit} />)}
         <InputBox selectedType={selectedReddit}/>
       </div>
     )

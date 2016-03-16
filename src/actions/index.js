@@ -42,3 +42,16 @@ export const addNewData = (selectedType, text) => {
       })
   }
 }
+
+export const deleteData = (selectedType, id) => {
+  return (dispatch) => {
+    return request.delete('/api/list?type=' + selectedType)
+      .send({id})
+      .end((err, res) => {
+        if (err) {
+          console.error(err)
+        }
+        dispatch(fetchRedditData(selectedType))
+      })
+  }
+}

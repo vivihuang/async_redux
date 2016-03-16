@@ -6,8 +6,6 @@ var path = require('path')
 var bodyParser = require('body-parser')
 
 var config = require('./webpack.config')
-var BOOK_FILE = path.join(__dirname, 'book.json')
-var FILM_FILE = path.join(__dirname, 'film.json')
 
 var app = new (require('express'))()
 var port = 3000
@@ -28,8 +26,9 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html')
 })
 
-app.get('/api/book', function(req, res) {
-  fs.readFile(BOOK_FILE, function(err, data) {
+app.get('/api/list', function(req, res) {
+  var file_name = path.join(__dirname, req.query.type + '.json')
+  fs.readFile(file_name, function(err, data) {
     if (err) {
       console.error(err)
       process.exit(1)
@@ -38,8 +37,9 @@ app.get('/api/book', function(req, res) {
   })
 })
 
-app.post('/api/book', function(req, res) {
-  fs.readFile(BOOK_FILE, function(err, data) {
+app.post('/api/list', function(req, res) {
+  var file_name = path.join(__dirname, req.query.type + '.json')
+  fs.readFile(file_name, function(err, data) {
     if (err) {
       console.error(err)
       process.exit(1)
@@ -50,47 +50,13 @@ app.post('/api/book', function(req, res) {
       id: lastId + 1,
       title: req.body.title
     }
-    console.log(newBook)
     bookList.data.children.push(newBook)
-    fs.writeFile(BOOK_FILE, JSON.stringify(bookList, null, 4), function(err) {
+    fs.writeFile(file_name, JSON.stringify(bookList, null, 4), function(err) {
       if (err) {
         console.error(err)
         process.exit(1)
       }
       res.json(bookList)
-    })
-  })
-})
-
-app.get('/api/film', function(req, res) {
-  fs.readFile(FILM_FILE, function(err, data) {
-    if (err) {
-      console.error(err)
-      process.exit(1)
-    }
-    res.json(JSON.parse(data))
-  })
-})
-
-app.post('/api/film', function(req, res) {
-  fs.readFile(FILM_FILE, function(err, data) {
-    if (err) {
-      console.error(err)
-      process.exit(1)
-    }
-    var filmList = JSON.parse(data)
-    var newFilm = {
-      //id: Date.now(),
-      //author: req.body.author,
-      //text: req.body.text,
-    }
-    filmList.push(newFilm)
-    fs.writeFile(FILM_FILE, JSON.stringify(filmList, null, 4), function(err) {
-      if (err) {
-        console.error(err)
-        process.exit(1)
-      }
-      res.json(filmList)
     })
   })
 })

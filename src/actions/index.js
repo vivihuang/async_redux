@@ -18,7 +18,7 @@ export const selectType = (data) => {
 
 export const fetchRedditData = (type) => {
   return (dispatch) => {
-    return request.get('/api/' + type)
+    return request.get('/api/list?type=' + type)
       .use(prefix)
       .end((err, res) => {
         if (err) {
@@ -31,7 +31,7 @@ export const fetchRedditData = (type) => {
 
 export const addNewData = (selectedType, text) => {
   return (dispatch) => {
-    return request.post('/api/' + selectedType)
+    return request.post('/api/list?type=' + selectedType)
       .send({title: text})
       .set('Accept', 'application/json')
       .end((err, res) => {

@@ -30,16 +30,15 @@ export const fetchRedditData = (type) => {
 }
 
 export const addNewData = (selectedType, text) => {
-  console.log('here')
   return (dispatch) => {
-    request.post('/api/' + selectedType)
+    return request.post('/api/' + selectedType)
       .send({title: text})
       .set('Accept', 'application/json')
       .end((err, res) => {
         if (err) {
           console.error(err)
         }
+        dispatch(fetchRedditData(selectedType))
       })
-    return dispatch(fetchRedditData(selectedType))
   }
 }

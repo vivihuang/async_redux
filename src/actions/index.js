@@ -16,9 +16,9 @@ export const selectType = (data) => {
   }
 }
 
-export const fetchRedditData = (value) => {
+export const fetchRedditData = (type) => {
   return (dispatch) => {
-    return request.get('/api/' + value)
+    return request.get('/api/' + type)
       .use(prefix)
       .end((err, res) => {
         if (err) {
@@ -26,5 +26,20 @@ export const fetchRedditData = (value) => {
         }
         dispatch(receiveRedditData(res.body))
       })
+  }
+}
+
+export const addNewData = (selectedType, text) => {
+  console.log('here')
+  return (dispatch) => {
+    request.post('/api/' + selectedType)
+      .send({title: text})
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        if (err) {
+          console.error(err)
+        }
+      })
+    return dispatch(fetchRedditData(selectedType))
   }
 }

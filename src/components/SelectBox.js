@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 class SelectBox extends Component {
   render () {
-    const {onChange, value, options} = this.props
+    let {onChange, value, options} = this.props
     return (
       <select defaultValue={value} onChange={(e) => {
         e.preventDefault()

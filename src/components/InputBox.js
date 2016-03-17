@@ -8,7 +8,7 @@ class InputBox extends Component {
   }
 
   handleSubmit (text) {
-    const {id, onSubmit} = this.props
+    let {id, onSubmit} = this.props
     _.isUndefined(id) ? onSubmit(text) : onSubmit(id, text)
   }
 

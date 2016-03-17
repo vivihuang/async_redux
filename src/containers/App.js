@@ -5,6 +5,7 @@ import { fetchRedditData, selectType } from '../actions'
 import Record from './Record'
 import AddNewData from './AddNewData'
 import SelectBox from '../components/SelectBox'
+import RefreshBox from '../components/RefreshBox'
 
 class App extends Component {
   constructor (props) {
@@ -31,7 +32,6 @@ class App extends Component {
   }
 
   handleRefresh (event) {
-    event.preventDefault()
     const {dispatch} = this.props
     dispatch(fetchRedditData(this.props.selectedReddit))
   }
@@ -42,12 +42,7 @@ class App extends Component {
       <div>
         <h2>{selectedReddit}</h2>
         <SelectBox onChange={this.handleChange} options={['book', 'film']} value={selectedReddit} />
-        <div>
-          <p>Last updated at {new Date(refreshTime).toLocaleTimeString()}
-            {'  '}
-            <button onClick={this.handleRefresh}>Refresh</button>
-          </p>
-        </div>
+        <RefreshBox onClick={this.handleRefresh} refreshTime={refreshTime} />
         {_.isEmpty(items) ? (<div><h2>Loading...</h2></div>) : (<Record records={items.data.children} selectedType={selectedReddit} />)}
         <AddNewData />
       </div>

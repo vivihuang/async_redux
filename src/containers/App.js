@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import { fetchRedditData, selectType } from '../actions'
 import Record from './Record'
+import AddNewData from './AddNewData'
 import SelectBox from '../components/SelectBox'
-import InputBox from './InputBox'
 
 class App extends Component {
   constructor (props) {
@@ -49,7 +49,7 @@ class App extends Component {
           </p>
         </div>
         {_.isEmpty(items) ? (<div><h2>Loading...</h2></div>) : (<Record records={items.data.children} selectedType={selectedReddit} />)}
-        <InputBox selectedType={selectedReddit}/>
+        <AddNewData />
       </div>
     )
   }

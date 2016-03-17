@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import { deleteData, modifyData } from '../actions'
+import InputBox from '../components/InputBox'
 
 class Record extends Component {
   constructor (props) {
@@ -22,12 +23,12 @@ class Record extends Component {
   }
 
   handleSubmit (id, text) {
-    const {dispatch, selectedType} = this.props
+    const {dispatch, selectedType, modifiedId} = this.props
     dispatch(modifyData(selectedType, id, text))
+    this.setState({modifiedId: modifiedId})
   }
 
   render () {
-    let input
     let linkStyle = {
       textDecoration: 'underline',
       color: 'blue',
@@ -40,10 +41,7 @@ class Record extends Component {
             return this.state.modifiedId === item.id
               ? (
               <li key={index}>
-                <form onSubmit={() => { this.handleSubmit(item.id, input.value) }}>
-                  <input type='text' defaultValue={item.title} ref={(node) => { input = node }} />
-                  <button type='submit'>Submit</button>
-                </form>
+                <InputBox onSubmit={this.handleSubmit} id={item.id} defaultValue={item.title}/>
               </li>)
               : (
               <li key={index}>

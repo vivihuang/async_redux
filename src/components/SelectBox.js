@@ -3,9 +3,13 @@ import _ from 'lodash'
 
 class SelectBox extends Component {
   render () {
+    const {onChange, value, options} = this.props
     return (
-      <select defaultValue={this.props.value} onChange={(e) => this.props.onChange(e.target.value)}>
-        {_.map(this.props.options, (item, index) => { return (<option key={index} value={item}>{item}</option>) })}
+      <select defaultValue={value} onChange={(e) => {
+        e.preventDefault()
+        onChange(e.target.value)
+      }}>
+        {_.map(options, (item, index) => { return (<option key={index} value={item}>{item}</option>) })}
       </select>
     )
   }

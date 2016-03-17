@@ -38,12 +38,16 @@ class App extends Component {
 
   render () {
     let {items, refreshTime, selectedReddit} = this.props
+    let records = _.isEmpty(items)
+      ? (<div><h2>Loading...</h2></div>)
+      : (<Record records={items.data.children} selectedType={selectedReddit} />)
+
     return (
       <div>
         <h2>{selectedReddit}</h2>
         <SelectBox onChange={this.handleChange} options={['book', 'film']} value={selectedReddit} />
         <RefreshBox onClick={this.handleRefresh} refreshTime={refreshTime} />
-        {_.isEmpty(items) ? (<div><h2>Loading...</h2></div>) : (<Record records={items.data.children} selectedType={selectedReddit} />)}
+        {records}
         <AddNewData />
       </div>
     )

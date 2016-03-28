@@ -4,7 +4,7 @@ import ReactDom from 'react-dom'
 import { Provider } from 'react-redux'
 import { Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-import appStore from './stores/appStore'
+import appStore from './stores/index'
 import routes from './routes/index'
 
 const history = syncHistoryWithStore(browserHistory, appStore)

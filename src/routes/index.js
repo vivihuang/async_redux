@@ -9,9 +9,9 @@ class SelectLinks extends Component {
     return (
       <div>
         <span><Link to='/' activeStyle={ACTIVE}>Homepage</Link></span>
-        <span><Link to='/users' activeStyle={ACTIVE}>  users</Link></span>
-        <span><Link to='/users/1' activeStyle={ACTIVE}>  user1</Link></span>
-        <span><Link to='/about' activeStyle={ACTIVE}>  about</Link></span>
+        <span><Link to='/test/users' activeStyle={ACTIVE}>  users</Link></span>
+        <span><Link to='/test/users/1' activeStyle={ACTIVE}>  user1</Link></span>
+        <span><Link to='/test/about' activeStyle={ACTIVE}>  about</Link></span>
         {this.props.children}
       </div>
     )
@@ -52,10 +52,12 @@ const routes =
   (
   <Route path='/' component={SelectLinks}>
     <IndexRoute component={App}/>
-    <Route path='about' component={About}/>
-    <Route path='users'>
-      <IndexRoute component={Users}/>
-      <Route path=':id' component={User}/>
+    <Route path='test'>
+      <Route path='about' component={About}/>
+      <Route path='users'>
+        <IndexRoute component={Users}/>
+        <Route path=':id' component={User}/>
+      </Route>
     </Route>
   </Route>
   )

@@ -27,6 +27,10 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html')
 })
 
+app.get('/test/*', function(req, res) {
+  res.sendFile(__dirname + '/index.html')
+})
+
 app.get('/api/list', function(req, res) {
   var file_name = path.join(__dirname, req.query.type + '.json')
   fs.readFile(file_name, function(err, data) {

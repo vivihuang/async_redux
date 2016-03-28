@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import _ from 'lodash'
+import { routerReducer } from 'react-router-redux'
 
 let selectedReddit = (state = 'book', action) => {
   switch (action.type) {
@@ -27,7 +28,8 @@ let fetchData = (state = [], action) => {
 
 const rootReducer = combineReducers({
   selectedReddit,
-  fetchData
+  fetchData,
+  routing: routerReducer
 })
 
 export default rootReducer

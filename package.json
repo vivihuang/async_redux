@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node server.js",
     "test": "cross-env NODE_ENV=test mocha ./src/test/**/*.js --recursive --compilers js:babel-register --require ./src/test/setup.js",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "web": "nightwatch --test test/test.js"
   },
   "repository": {
     "type": "git",
@@ -45,6 +46,7 @@
     "isparta": "^4.0.0",
     "jsdom": "^8.1.0",
     "mocha": "^2.4.5",
+    "nightwatch": "^0.8.18",
     "npm-shrinkwrap": "^200.5.1",
     "path": "^0.12.7",
     "run-sequence": "^1.1.5",

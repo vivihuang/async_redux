@@ -33,3 +33,5 @@ node_modules
 
 .idea
 public
+test/reports
+bin/*.jar

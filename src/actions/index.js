@@ -1,5 +1,5 @@
 import request from 'superagent'
-import prefix from 'superagent-prefix'
+import fetch from 'isomorphic-fetch'
 
 let receiveRedditData = (data) => {
   return {
@@ -18,28 +18,40 @@ export const selectType = (data) => {
 
 export const fetchRedditData = (type) => {
   return (dispatch) => {
-    return request.get('/api/list?type=' + type)
-      .use(prefix)
-      .end((err, res) => {
-        if (err) {
-          return console.error(err)
+    return fetch('/api/list?type=' + type)
+      .then((res) => {
+        if (res.status >= 400) {
+          throw new Error('Bad response from server')
         }
-        dispatch(receiveRedditData(res.body))
+        return res.json()
+      })
+      .then((data) => {
+        dispatch(receiveRedditData(data))
       })
   }
 }
 
 export const addNewData = (selectedType, text) => {
   return (dispatch) => {
-    return request.post('/api/list?type=' + selectedType)
-      .send({title: text})
-      .set('Accept', 'application/json')
-      .end((err, res) => {
-        if (err) {
-          console.error(err)
-        }
-        dispatch(fetchRedditData(selectedType))
+    return fetch('/api/list?type=' + selectedType, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: text
       })
+    })
+    .then((res) => {
+      if (res.status >= 400) {
+        throw new Error('Bad response from server')
+      }
+      return res.json()
+    })
+    .then((data) => {
+      dispatch(fetchRedditData(data.kind))
+    })
   }
 }
 

@@ -1,4 +1,3 @@
-import request from 'superagent'
 import fetch from 'isomorphic-fetch'
 
 let receiveRedditData = (data) => {
@@ -57,26 +56,49 @@ export const addNewData = (selectedType, text) => {
 
 export const deleteData = (selectedType, id) => {
   return (dispatch) => {
-    return request.delete('/api/list?type=' + selectedType)
-      .send({id})
-      .end((err, res) => {
-        if (err) {
-          console.error(err)
-        }
-        dispatch(fetchRedditData(selectedType))
+    return fetch('/api/list?type=' + selectedType, {
+      method: 'delete',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id
       })
+    })
+    .then((res) => {
+      if (res.status >= 400) {
+        throw new Error('Bad response from server')
+      }
+      return res.json()
+    })
+    .then((data) => {
+      dispatch(fetchRedditData(data.kind))
+    })
   }
 }
 
 export const modifyData = (selectedType, id, text) => {
   return (dispatch) => {
-    return request.put('/api/list?type=' + selectedType)
-      .send({id, title: text})
-      .end((err, res) => {
-        if (err) {
-          console.error(err)
-        }
-        dispatch(fetchRedditData(selectedType))
+    return fetch('/api/list?type=' + selectedType, {
+      method: 'put',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id,
+        title: text
       })
+    })
+    .then((res) => {
+      if (res.status >= 400) {
+        throw new Error('Bad response from server')
+      }
+      return res.json()
+    })
+    .then((data) => {
+      dispatch(fetchRedditData(data.kind))
+    })
   }
 }

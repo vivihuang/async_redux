@@ -45,6 +45,7 @@
     "isparta": "^4.0.0",
     "jsdom": "^8.1.0",
     "mocha": "^2.4.5",
+    "npm-shrinkwrap": "^200.5.1",
     "path": "^0.12.7",
     "run-sequence": "^1.1.5",
     "superagent": "^1.8.1",
